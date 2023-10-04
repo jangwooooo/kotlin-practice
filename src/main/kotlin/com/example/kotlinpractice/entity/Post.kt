@@ -1,5 +1,6 @@
 package com.example.kotlinpractice.entity
 
+import com.example.kotlinpractice.dto.ModifyPostRequestDto
 import jakarta.persistence.*
 
 @Entity
@@ -7,10 +8,16 @@ class Post (
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        var id: Long = 0,
+        val id: Long = 0,
 
-        val title: String,
+        var title: String,
 
         @Enumerated(EnumType.STRING)
-        val category: Category
-)
+        var category: Category
+
+) {
+        fun update(modifyPostRequestDto: ModifyPostRequestDto) {
+                this.title = modifyPostRequestDto.title;
+                this.category = modifyPostRequestDto.category;
+        }
+}
